@@ -9,7 +9,7 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th><a th:href="@{/suppliers(sort=name)}">Name</a></th>
     </tr>
     <tr th:each="supplier : ${suppliers}">
         <td th:text="${supplier.id}"></td>

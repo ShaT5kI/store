@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Stock</title>
+</head>
+<body>
+
+<h1>Edit Stock</h1>
+
+<form action="/stocks/update" method="POST">
+    <input type="hidden" name="id" th:value="${stock.id}" />
+
+    <div>
+        <label for="cellNumber">Cell number:</label>
+        <input type="text" id="cellNumber" name="cellNumber" th:value="${stock.cellNumber}" required />
+    </div>
+
+    <div>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" th:value="${stock.quantity}" required />
+    </div>
+
+    <div>
+        <label for="product">Product:</label>
+        <select id="product" name="productId" required>
+            <option th:each="product : ${products}"
+                    th:value="${product.id}"
+                    th:text="${product.name}"
+                    th:selected="${product.id == stock.product.id}"></option>
+        </select>
+    </div>
+
+    <button type="submit">Update Stock</button>
+    <div>
+        <a href="/stocks"> Back</a>
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Supplier</title>
+</head>
+<body>
+
+<h1>Edit Supplier</h1>
+
+<form action="/suppliers/update" method="POST">
+    <input type="hidden" name="id" th:value="${supplier.id}" />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${supplier.name}" required />
+
+    <label for="documentsPackage">Documents Package:</label>
+    <input type="checkbox" id="documentsPackage" name="documentsPackage" th:checked="${supplier.documentsPackage}" />
+
+    <label for="guarantee">Guarantee:</label>
+    <input type="checkbox" id="guarantee" name="guarantee" th:checked="${supplier.guarantee}" />
+
+    <button type="submit">Update Supplier</button>
+    <div>
+        <a href="/suppliers"> Back</a>
+    </div>
+</form>
+
+</body>
+</html>

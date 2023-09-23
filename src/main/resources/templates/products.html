@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Supplier</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:if="${product.supplier != null}" th:text="${product.supplier.name}"></td>
+        <td th:unless="${product.supplier != null}">No Supplier</td>
+
+        <td> <a th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a></td>
+        <td> <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a></td>
+    </tr>
+</table>
+
+<div>
+    <span th:if="${currentPage > 0}">
+        <a th:href="@{/products(pageNo=${currentPage - 1})}">Previous</a>
+    </span>
+    <span th:if="${currentPage < totalPages - 1}">
+        <a th:href="@{/products(pageNo=${currentPage + 1})}">Next</a>
+    </span>
+</div>
+
+<a href="/products/new">Create Product</a>
+<div>
+    <a href="/"> Back</a>
+</div>
+
+</body>
+</html>

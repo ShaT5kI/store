@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Total price</th>
+        <th>Supplier</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.totalPrice}"></td>
+        <td th:if="${order.supplier != null}" th:text="${order.supplier.name}"></td>
+        <td th:unless="${order.supplier != null}">No Supplier</td>
+
+        <td> <a th:href="@{/orders/delete/{id}(id=${order.id})}">Delete</a></td>
+        <td> <a th:href="@{/orders/edit/{id}(id=${order.id})}">Edit</a></td>
+    </tr>
+</table>
+<a href="/orders/new">Create Order</a>
+<div>
+    <a href="/"> Back</a>
+</div>
+
+</body>
+</html>

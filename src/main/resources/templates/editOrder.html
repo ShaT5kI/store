@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Order</title>
+</head>
+<body>
+
+<h1>Edit Order</h1>
+
+<form action="/orders/update" method="POST">
+    <input type="hidden" name="id" th:value="${order.id}" />
+
+    <label for="totalPrice">Total price:</label>
+    <input type="text" id="totalPrice" name="totalPrice" th:value="${order.totalPrice}" required />
+
+    <label for="supplier">Supplier:</label>
+    <select id="supplier" name="supplierId" required>
+        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}" th:selected="${supplier.id == order.supplier.id}"></option>
+    </select>
+
+    <button type="submit">Update Order</button>
+    <div>
+        <a href="/orders"> Back</a>
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    <tr th:each="supplier : ${suppliers}">
+        <td th:text="${supplier.id}"></td>
+        <td th:text="${supplier.name}"></td>
+        <td th:checkbox="${supplier.documentsPackage}"></td>
+        <td th:checkbox="${supplier.guarantee}"></td>
+        <!-- other columns -->
+        <td> <a th:href="@{/suppliers/delete/{id}(id=${supplier.id})}">Delete</a></td>
+        <td> <a th:href="@{/suppliers/edit/{id}(id=${supplier.id})}">Edit</a></td>
+    </tr>
+</table>
+<a href="/suppliers/new">Create Supplier</a>
+<div>
+    <a href="/"> Back</a>
+</div>
+
+</body>
+</html>

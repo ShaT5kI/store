@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/products/create" method="post" th:object="${product}">
+    <div>
+        <label>Name: </label>
+        <input type="text" th:field="*{name}" required>
+        <label>Price: </label>
+        <input type="text" th:field="*{price}" required>
+        <label>Supplier: </label>
+        <select name="supplierId" required>
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
+        </select>
+    </div>
+
+    <button type="submit">Create</button>
+    <div>
+    <a href="/products"> Back</a>
+    </div>
+</form>
+</body>
+</html>

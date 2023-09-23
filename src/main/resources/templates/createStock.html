@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/stocks/create" method="post" th:object="${stock}">
+    <div>
+        <label>Cell number: </label>
+        <input type="text" th:field="*{cellNumber}" required>
+        <label>Quantity: </label>
+        <input type="text" th:field="*{quantity}" required>
+        <label>Product: </label>
+        <select name="productId" required>
+            <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+        </select>
+    </div>
+    <!-- Add more form fields here -->
+    <button type="submit">Create</button>
+
+    <div>
+        <a href="/stocks"> Back</a>
+    </div>
+</form>
+</body>
+</html>

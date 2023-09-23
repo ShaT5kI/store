@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Cell number</th>
+        <th>Quantity</th>
+        <th>Product</th>
+    </tr>
+    <tr th:each="stock : ${stocks}">
+        <td th:text="${stock.id}"></td>
+        <td th:text="${stock.cellNumber}"></td>
+        <td th:text="${stock.quantity}"></td>
+        <td th:if="${stock.product != null}" th:text="${stock.product.name}"></td>
+        <td th:unless="${stock.product != null}">No Product</td>
+        <!-- other columns -->
+        <td> <a th:href="@{/stocks/delete/{id}(id=${stock.id})}">Delete</a></td>
+        <td> <a th:href="@{/stocks/edit/{id}(id=${stock.id})}">Edit</a></td>
+    </tr>
+</table>
+<a href="/stocks/new">Create Stock</a>
+<div>
+    <a href="/"> Back</a>
+</div>
+
+</body>
+</html>

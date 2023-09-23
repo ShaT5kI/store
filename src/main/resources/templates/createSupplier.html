@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/suppliers/create" method="post" th:object="${supplier}">
+    <div>
+        <label>Name: </label>
+        <input type="text" th:field="*{name}" required>
+        <label>Document package: </label>
+        <td><input type="checkbox" th:checked="${supplier.documentsPackage}"/> </td>
+        <label>Guarantee: </label>
+        <td><input type="checkbox" th:checked="${supplier.guarantee}"/> </td>
+    </div>
+    <!-- Add more form fields here -->
+    <button type="submit">Create</button>
+    <div>
+        <a href="/suppliers"> Back</a>
+    </div>
+</form>
+</body>
+</html>

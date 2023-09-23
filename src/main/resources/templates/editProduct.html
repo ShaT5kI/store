@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+</head>
+<body>
+
+<h1>Edit Product</h1>
+
+<form action="/products/update" method="POST">
+    <input type="hidden" name="id" th:value="${product.id}" />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${product.name}" required />
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" th:value="${product.price}" required />
+
+    <label for="supplier">Supplier:</label>
+    <select id="supplier" name="supplierId" required>
+        <option value="">Select a supplier</option>
+        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"
+                th:selected="${supplier.id == product.supplier.id}"></option>
+    </select>
+
+    <button type="submit">Update Product</button>
+    <div>
+        <a href="/products"> Back</a>
+    </div>
+</form>
+
+</body>
+</html>

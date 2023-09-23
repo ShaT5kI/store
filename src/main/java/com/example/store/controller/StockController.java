@@ -2,7 +2,7 @@ package com.example.store.controller;
 
 import com.example.store.entity.Product;
 import com.example.store.entity.Stock;
-import com.example.store.entity.Supplier;
+import com.example.store.repository.StockRepository;
 import com.example.store.service.ProductService;
 import com.example.store.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,13 @@ import java.util.List;
 public class StockController {
     private final StockService stockService;
     private final ProductService productService;
+    private final StockRepository stockRepository;
 
     @Autowired
-    public StockController(StockService stockService, ProductService productService) {
+    public StockController(StockService stockService, ProductService productService, StockRepository stockRepository) {
         this.stockService = stockService;
         this.productService = productService;
+        this.stockRepository = stockRepository;
     }
 
     @GetMapping
@@ -55,6 +57,14 @@ public class StockController {
         }
 
     }
+
+    @GetMapping("/")
+    public String showStocksByCellNumber(@RequestParam(name = "cellNumber") int cellNumber, Model model) {
+        List<Stock> stocks = stockRepository.findByCellNumberOrderByCellNumberAsc(cellNumber);
+        model.addAttribute("stocks", stocks);
+        return "stocks";
+    }
+
 
     @GetMapping("/delete/{id}")
     public String deleteStock(@PathVariable("id") Long id) {

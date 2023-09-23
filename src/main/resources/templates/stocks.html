@@ -22,7 +22,13 @@
         <!-- other columns -->
         <td> <a th:href="@{/stocks/delete/{id}(id=${stock.id})}">Delete</a></td>
         <td> <a th:href="@{/stocks/edit/{id}(id=${stock.id})}">Edit</a></td>
+
     </tr>
+    <form action="/stocks" method="get">
+        <label for="cellNumber">Введите номер ячейки:</label>
+        <input type="text" id="cellNumber" name="cellNumber">
+        <button type="submit">Показать ячейки</button>
+    </form>
 </table>
 <a href="/stocks/new">Create Stock</a>
 <div>

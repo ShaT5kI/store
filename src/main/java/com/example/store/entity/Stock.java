@@ -14,6 +14,7 @@ public class Stock {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @Column(nullable = false)
     private int cellNumber;
 
     @Positive(message = "Число должно быть больше нуля")

@@ -11,7 +11,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int totalPrice;
+
+    @Column(name = "is_open", nullable = false)
+    private boolean isOpen;
 
     @ManyToOne
     @JoinColumn(name = "supplierId")
@@ -32,12 +34,12 @@ public class Order {
         this.id = id;
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
+    public boolean isOpen() {
+        return isOpen;
     }
 
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 
     public Supplier getSupplier() {

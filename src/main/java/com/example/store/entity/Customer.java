@@ -1,43 +1,32 @@
 package com.example.store.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Customer extends Person {
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
-    @Column(nullable = false)
-    private String name;
+    @OneToMany(mappedBy = "customer")
+    private List<Car> cars;
 
-    @ManyToOne
-    @JoinColumn(name = "orderId")
-    private Order order;
-
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
-    public String getName() {
-        return name;
+    public List<Car> getCars() {
+        return cars;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
 }

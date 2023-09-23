@@ -1,4 +1,14 @@
 package com.example.store.entity;
 
-public class Owner {
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "owners")
+public class Owner extends Person {
+
+    @OneToOne
+    private Supplier supplier;
+
 }

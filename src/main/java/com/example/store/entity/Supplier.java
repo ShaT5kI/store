@@ -17,8 +17,22 @@ public class Supplier {
     private boolean documentsPackage;
     private boolean guarantee;
 
-    @OneToMany(mappedBy = "supplier")
+    @ManyToMany
+    @JoinTable(name = "products_suppliers",
+            joinColumns = @JoinColumn(name = "supplier_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
+
+    @OneToOne
+    private Owner owner;
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 
     public Long getId() {
         return id;

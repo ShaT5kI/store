@@ -2,6 +2,7 @@ package com.example.store.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,22 +11,20 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int totalPrice;
+
+    @Column(name = "is_open", nullable = false)
+    private boolean isOpen;
 
     @ManyToOne
     @JoinColumn(name = "supplierId")
     private Supplier supplier;
 
-    @ManyToMany
-    private Set<Product> products;
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
 
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+    @OneToMany(mappedBy = "order")
+    private List<CarOrderProduct> carOrderProducts;
 
     public Long getId() {
         return id;
@@ -33,6 +32,14 @@ public class Order {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 
     public Supplier getSupplier() {
@@ -43,11 +50,15 @@ public class Order {
         this.supplier = supplier;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setProducts(Set<Product> productSet) {
-        this.products = productSet;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<CarOrderProduct> getCarOrderProducts() {
+        return carOrderProducts;
     }
 }

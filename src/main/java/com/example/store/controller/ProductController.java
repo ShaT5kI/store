@@ -49,8 +49,6 @@ public class ProductController {
     @PostMapping("/create")
     public String createProduct(@ModelAttribute("product") Product product,
                                 @RequestParam("supplierId") Long supplierId) {
-        Supplier supplier = supplierService.getById(supplierId);
-        product.setSupplier(supplier);
         productService.addNew(product);
         return "redirect:/products";
     }
@@ -73,8 +71,6 @@ public class ProductController {
     @PostMapping("/update")
     public String updateProduct(@ModelAttribute("product") Product product,
                               @RequestParam("supplierId") Long supplierId) {
-        Supplier supplier = supplierService.getById(supplierId);
-        product.setSupplier(supplier);
         productService.update(product);
         return "redirect:/products";
     }

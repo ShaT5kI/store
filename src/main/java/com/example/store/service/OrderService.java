@@ -1,10 +1,15 @@
 package com.example.store.service;
 
+import com.example.store.entity.Car;
+import com.example.store.entity.CarOrderProduct;
 import com.example.store.entity.Order;
+import com.example.store.entity.Product;
 import com.example.store.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -38,4 +43,39 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public List<Car> getCarsForOrder(Long carId) {
+        var orderOptional = orderRepository.findById(carId);
+
+        if (orderOptional.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        var order = orderOptional.get();
+
+        var carOrderProducts = order.getCarOrderProducts();
+        List<Car> cars = new ArrayList<>();
+        for (CarOrderProduct cop : carOrderProducts) {
+            cars.add(cop.getCar());
+        }
+
+        return cars;
+    }
+
+    public List<Product> getProductsForOrder(Long carId) {
+        var orderOptional = orderRepository.findById(carId);
+
+        if (orderOptional.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        var order = orderOptional.get();
+
+        var carOrderProducts = order.getCarOrderProducts();
+        List<Product> products = new ArrayList<>();
+        for (CarOrderProduct cop : carOrderProducts) {
+            products.add(cop.getProduct());
+        }
+
+        return products;
+    }
 }

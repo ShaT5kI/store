@@ -42,8 +42,6 @@ public class CustomerController {
     @PostMapping("/create")
     public String createCustomer(@ModelAttribute("customer") Customer customer,
                                  @RequestParam("orderId") Long orderId) {
-        Order order = orderService.getById(orderId);
-        customer.setOrder(order);
         customerService.addNew(customer);
         return "redirect:/customers";
     }
@@ -51,8 +49,6 @@ public class CustomerController {
     @PostMapping("/update")
     public String updateCustomer(@ModelAttribute("customer") Customer customer,
                                  @RequestParam("orderId") Long orderId) {
-        Order order = orderService.getById(orderId);
-        customer.setOrder(order);
         customerService.update(customer);
         return "redirect:/customers";
     }

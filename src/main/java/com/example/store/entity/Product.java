@@ -17,17 +17,14 @@ public class Product {
     @Column(nullable = false)
     private int price;
 
-    @ManyToOne
-    @JoinColumn(name = "supplierId")
-    private Supplier supplier;
+    @ManyToMany
+    @JoinTable(name = "products_suppliers",
+            joinColumns = @JoinColumn(name = "supplier_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Supplier> suppliers;
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    @OneToMany(mappedBy = "product")
+    private List<CarOrderProduct> carOrderProducts;
 
     public Long getId() {
         return id;
@@ -45,12 +42,23 @@ public class Product {
         this.name = name;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public int getPrice() {
+        return price;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
+    public List<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.suppliers = suppliers;
+    }
+
+    public List<CarOrderProduct> getCarOrderProducts() {
+        return carOrderProducts;
+    }
 }

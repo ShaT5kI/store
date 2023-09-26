@@ -15,7 +15,6 @@
     </tr>
     <tr th:each="order : ${orders}">
         <td th:text="${order.id}"></td>
-        <td th:text="${order.totalPrice}"></td>
         <td th:if="${order.supplier != null}" th:text="${order.supplier.name}"></td>
         <td th:unless="${order.supplier != null}">No Supplier</td>
 

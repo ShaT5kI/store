@@ -7,8 +7,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {
-
     @OneToOne
     private Supplier supplier;
-
 }

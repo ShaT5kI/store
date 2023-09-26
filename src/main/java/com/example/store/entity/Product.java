@@ -17,11 +17,9 @@ public class Product {
     @Column(nullable = false)
     private int price;
 
-    @ManyToMany
-    @JoinTable(name = "products_suppliers",
-            joinColumns = @JoinColumn(name = "supplier_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Supplier> suppliers;
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
     @OneToMany(mappedBy = "product")
     private List<CarOrderProduct> carOrderProducts;
@@ -50,15 +48,15 @@ public class Product {
         this.price = price;
     }
 
-    public List<Supplier> getSuppliers() {
-        return suppliers;
-    }
-
-    public void setSuppliers(List<Supplier> suppliers) {
-        this.suppliers = suppliers;
-    }
-
     public List<CarOrderProduct> getCarOrderProducts() {
         return carOrderProducts;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
     }
 }

@@ -49,7 +49,7 @@ public class ProductController {
     @PostMapping("/create")
     public String createProduct(@ModelAttribute("product") Product product,
                                 @RequestParam("supplierId") Long supplierId) {
-        productService.addNew(product);
+        productService.addNew(product, supplierId);
         return "redirect:/products";
     }
 

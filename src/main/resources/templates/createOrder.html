@@ -7,8 +7,6 @@
 <body>
 <form action="/orders/create" method="post" th:object="${order}">
     <div>
-        <label>Total price: </label>
-        <input type="text" th:field="*{totalPrice}" required>
         <label>Supplier: </label>
         <select name="supplierId" required>
             <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>

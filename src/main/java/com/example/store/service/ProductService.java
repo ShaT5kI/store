@@ -1,11 +1,9 @@
 package com.example.store.service;
 
 import com.example.store.ProcedureCaller;
-import com.example.store.entity.Car;
-import com.example.store.entity.CarOrderProduct;
-import com.example.store.entity.Order;
-import com.example.store.entity.Product;
+import com.example.store.entity.*;
 import com.example.store.repository.ProductRepository;
+import com.example.store.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,14 +20,22 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProcedureCaller procedureCaller;
 
+    private final SupplierRepository supplierRepository;
+
     @Autowired
-    public ProductService(ProductRepository productRepository, ProcedureCaller procedureCaller) {
+    public ProductService(ProductRepository productRepository, ProcedureCaller procedureCaller, SupplierRepository supplierRepository) {
         this.productRepository = productRepository;
         this.procedureCaller = procedureCaller;
+        this.supplierRepository = supplierRepository;
     }
 
-    public void addNew(Product product) {
-        productRepository.save(product);
+    public void addNew(Product product, Long supplierId) {
+        var supplier = supplierRepository.findById(supplierId);
+
+        if (supplier.isPresent()) {
+            product.setSupplier(supplier.get());
+            productRepository.save(product);
+        }
     }
 
     public List<Product> getAll() {
@@ -90,5 +96,4 @@ public class ProductService {
 
         return orders;
     }
-
 }

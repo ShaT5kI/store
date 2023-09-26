@@ -41,8 +41,7 @@ public class OrderController {
 
     @PostMapping("/create")
     public String createOrder(@ModelAttribute("order") Order order,
-                                @RequestParam("supplierId") Long supplierId,
-                              @RequestParam Map<String,String> productQuantities) {
+                                @RequestParam("supplierId") Long supplierId) {
         Supplier supplier = supplierService.getById(supplierId);
         order.setSupplier(supplier);
         orderService.addNew(order);

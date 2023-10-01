@@ -38,4 +38,7 @@ public class SupplierService {
         supplierRepository.save(supplier);
     }
 
+    public List<Supplier> getAllFree() {
+        return supplierRepository.findAllFree();
+    }
 }

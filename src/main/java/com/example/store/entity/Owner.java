@@ -9,4 +9,12 @@ import jakarta.persistence.Table;
 public class Owner extends Person {
     @OneToOne
     private Supplier supplier;
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 }

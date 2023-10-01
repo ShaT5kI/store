@@ -65,7 +65,9 @@ create table if not exists cars_orders_products
 create sequence persons_seq
     increment by 50;
 
+create sequence cars_seq
+    increment by 50;
 
-
-
+create sequence cars_orders_products_seq
+    increment by 50;
 

@@ -80,11 +80,12 @@ public class OrderController {
     public String addProductAndCar(@ModelAttribute("order") Order order,
                                    @RequestParam("carId") Long carId,
                                    @RequestParam("productId") Long productId) {
-        orderService.addProductAndCar(order, carId, productId);
+        Long orderId = order.getId();
+        orderService.addProductAndCar(orderId, carId, productId);
         return "redirect:/orders";
     }
 
-    @GetMapping("/addProductAndCar")
+    @GetMapping("/addProductAndCar/{id}")
     public String showAddProductAndCar(@PathVariable("id") Long id, Model model) {
         Order order = orderService.getById(id);
         List<Car> cars = carService.getAll();

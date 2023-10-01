@@ -18,14 +18,18 @@ import java.util.*;
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    private CarRepository carRepository;
-    private ProductRepository productRepository;
+    private final CarRepository carRepository;
+    private final ProductRepository productRepository;
 
-    private CarOrderProductRepository carOrderProductRepository;
+    private final CarOrderProductRepository carOrderProductRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, CarRepository carRepository,
+                        ProductRepository productRepository, CarOrderProductRepository carOrderProductRepository) {
         this.orderRepository = orderRepository;
+        this.carRepository = carRepository;
+        this.productRepository = productRepository;
+        this.carOrderProductRepository = carOrderProductRepository;
     }
 
     public void addNew(Order order) {
@@ -87,16 +91,15 @@ public class OrderService {
         return products;
     }
 
-    public void addProductAndCar(Order order, Long carId, Long productId) {
+    public void addProductAndCar(Long orderId, Long carId, Long productId) {
         CarOrderProduct carOrderProduct = new CarOrderProduct();
-
         Optional<Car> car = carRepository.findById(carId);
         Optional<Product> product = productRepository.findById(productId);
-
-        if (car.isPresent() && product.isPresent()) {
+        Optional<Order> order = orderRepository.findById(orderId);
+        if (car.isPresent() && product.isPresent() && order.isPresent()) {
             carOrderProduct.setCar(car.get());
             carOrderProduct.setProduct(product.get());
-            carOrderProduct.setOrder(order);
+            carOrderProduct.setOrder(order.get());
             carOrderProductRepository.save(carOrderProduct);
         }
     }

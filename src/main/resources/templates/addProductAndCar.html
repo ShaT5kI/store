@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="/orders/addProductAndCar" method="post" th:object="${order}">
+<form action="/orders/addProductAndCar" method="post" th:object="${order}" >
     <div>
         <label>Car: </label>
         <select name="productId" required>
@@ -17,7 +17,7 @@
         <select name="carId" required>
             <option th:each="car : ${cars}"
                     th:value="${car.id}"
-                    th:each="${car.name}"></option>
+                    th:text="${car.name}"></option>
         </select>
     </div>
 

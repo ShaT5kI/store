@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/cars/create" method="post" th:object="${car}">
+    <div>
+        <label>Name: </label>
+        <input type="text" th:field="*{name}" required>
+        <label>Customer: </label>
+        <select name="customerId" required>
+            <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+        </select>
+    </div>
+
+    <button type="submit">Create</button>
+    <div>
+        <a href="/cars"> Back</a>
+    </div>
+</form>
+</body>
+</html>

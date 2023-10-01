@@ -12,6 +12,11 @@ public class Car {
     @Column(name = "id", nullable = false)
     protected Long id;
 
+    @Column(nullable = false)
+    private String name;
+
+
+
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
@@ -35,6 +40,13 @@ public class Car {
         this.customer = customer;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<CarOrderProduct> getCarOrderProducts() {
         return carOrderProducts;

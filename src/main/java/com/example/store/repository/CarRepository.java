@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("select distinct c from Car c where c.id in" +
@@ -15,4 +15,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
             "on cop.product.id = p.id " +
             "where p.id = :pr_id and o.isOpen = true)")
     List<Car> findCarByProductInWork(@Param("pr_id") Long productId);
+
+    Optional<Car> findById(Long id);
 }

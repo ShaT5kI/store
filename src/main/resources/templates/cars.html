@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Customer</th>
+    </tr>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.name}"></td>
+        <td th:if="${car.customer != null}" th:text="${car.customer.name}"></td>
+        <td th:unless="${car.customer != null}">No Customer</td>
+
+        <td> <a th:href="@{/cars/delete/{id}(id=${car.id})}">Delete</a></td>
+        <td> <a th:href="@{/cars/edit/{id}(id=${car.id})}">Edit</a></td>
+    </tr>
+</table>
+
+<div>
+    <span th:if="${currentPage > 0}">
+        <a th:href="@{/cars(pageNo=${currentPage - 1})}">Previous</a>
+    </span>
+    <span th:if="${currentPage < totalPages - 1}">
+        <a th:href="@{/cars(pageNo=${currentPage + 1})}">Next</a>
+    </span>
+</div>
+
+<a href="/cars/new">Create Car</a>
+<div>
+    <a href="/"> Back</a>
+</div>
+
+</body>
+</html>

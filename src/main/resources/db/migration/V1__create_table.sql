@@ -15,7 +15,7 @@ create table if not exists suppliers
 create table if not exists owners
 (
     id          bigint not null primary key references persons (id),
-    supplier_id bigint unique references suppliers(id)
+    supplier_id bigint unique references suppliers (id)
 );
 
 create table if not exists customers
@@ -25,15 +25,16 @@ create table if not exists customers
 
 create table if not exists products
 (
-    id    bigserial primary key,
-    name  varchar(255) not null,
-    price integer      not null,
-    supplier_id bigint references suppliers(id)
+    id          bigserial primary key,
+    name        varchar(255) not null,
+    price       integer      not null,
+    supplier_id bigint references suppliers (id)
 );
 
 create table if not exists cars
 (
-    id          bigint not null primary key,
+    id          bigint       not null primary key,
+    name        varchar(255) not null,
     customer_id bigint references customers (id)
 );
 

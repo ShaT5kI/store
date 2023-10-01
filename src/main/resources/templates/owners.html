@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customers</title>
+    <title>Owners</title>
 </head>
 <body>
 
@@ -11,16 +11,20 @@
         <th>ID</th>
         <th>Name</th>
     </tr>
-    <tr th:each="customer : ${customers}">
-        <td th:text="${customer.id}"></td>
-        <td th:text="${customer.name}"></td>
+    <tr th:each="owner : ${owners}">
+        <td th:text="${owner.id}"></td>
+        <td th:text="${owner.name}"></td>
     </tr>
 </table>
 
-<a href="/customers/new">Create Customer</a>
+<a href="/owners/new">Create Owners</a>
 <div>
     <a href="/"> Back</a>
 </div>
+
+</body>
+</html>
+<body>
 
 </body>
 </html>

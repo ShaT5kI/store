@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<form action="/owners/create" method="post" th:object="${owner}">
+    <div>
+        <label>Name: </label>
+        <input type="text" th:field="*{name}" required>
+
+    </div>
+
+    <button type="submit">Create</button>
+    <div>
+        <a href="/owners"> Back</a>
+    </div>
+</form>
+</body>
+</html>

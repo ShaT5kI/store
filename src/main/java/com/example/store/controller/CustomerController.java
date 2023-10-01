@@ -16,19 +16,15 @@ import java.util.List;
 @RequestMapping("/customers")
 public class CustomerController {
     private final CustomerService customerService;
-    private final OrderService orderService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, OrderService orderService) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
-        this.orderService = orderService;
     }
 
     @GetMapping("/new")
     public String showCreateCustomerForm(Model model) {
         model.addAttribute("customer", new Customer());
-        List<Order> orders = orderService.getAll();
-        model.addAttribute("suppliers", orders);
         return "createCustomer";
     }
 
@@ -40,15 +36,13 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public String createCustomer(@ModelAttribute("customer") Customer customer,
-                                 @RequestParam("orderId") Long orderId) {
+    public String createCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.addNew(customer);
         return "redirect:/customers";
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@ModelAttribute("customer") Customer customer,
-                                 @RequestParam("orderId") Long orderId) {
+    public String updateCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.update(customer);
         return "redirect:/customers";
     }

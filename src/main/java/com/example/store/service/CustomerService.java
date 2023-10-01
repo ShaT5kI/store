@@ -2,6 +2,7 @@ package com.example.store.service;
 
 import com.example.store.entity.Customer;
 import com.example.store.repository.CustomerRepository;
+import com.example.store.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, PersonRepository personRepository) {
         this.customerRepository = customerRepository;
     }
 

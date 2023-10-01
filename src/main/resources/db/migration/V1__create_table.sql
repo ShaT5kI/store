@@ -61,8 +61,8 @@ create table if not exists cars_orders_products
     product_id bigint references products (id)
 );
 
-
-
+create sequence persons_seq
+    increment by 50;
 
 
 

@@ -15,8 +15,6 @@
     <tr th:each="customer : ${customers}">
         <td th:text="${customer.id}"></td>
         <td th:text="${customer.name}"></td>
-        <td th:if="${customer.order != null}" th:text="${customer.order.id}"></td>
-        <td th:unless="${customer.order != null}">No Order</td>
     </tr>
 </table>
 

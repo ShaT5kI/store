@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add product and car</title>
+</head>
+<body>
+
+<form action="/orders/addProductAndCar" method="post" th:object="${order}">
+    <div>
+        <label>Car: </label>
+        <select name="productId" required>
+            <option th:each="product : ${products}"
+                    th:value="${product.id}"
+                    th:text="${product.name}"></option>
+        </select>
+        <select name="carId" required>
+            <option th:each="car : ${cars}"
+                    th:value="${car.id}"
+                    th:each="${car.name}"></option>
+        </select>
+    </div>
+
+    <button type="submit">Create</button>
+    <div>
+        <a href="/orders"> Back</a>
+    </div>
+</form>
+
+</body>
+</html>

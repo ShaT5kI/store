@@ -18,6 +18,7 @@
         <td th:if="${order.supplier != null}" th:text="${order.supplier.name}"></td>
         <td th:unless="${order.supplier != null}">No Supplier</td>
 
+        <td> <a th:href="@{/orders/addProductAndCar/{id}(id=${order.id})}">add product and car<\a></a>td>
         <td> <a th:href="@{/orders/delete/{id}(id=${order.id})}">Delete</a></td>
         <td> <a th:href="@{/orders/edit/{id}(id=${order.id})}">Edit</a></td>
     </tr>

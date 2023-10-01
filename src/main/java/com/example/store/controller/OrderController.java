@@ -1,8 +1,12 @@
 package com.example.store.controller;
 
+import com.example.store.entity.Car;
 import com.example.store.entity.Order;
+import com.example.store.entity.Product;
 import com.example.store.entity.Supplier;
+import com.example.store.service.CarService;
 import com.example.store.service.OrderService;
+import com.example.store.service.ProductService;
 import com.example.store.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,18 +14,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
     private final OrderService orderService;
     private final SupplierService supplierService;
+    private final CarService carService;
+
+    private final ProductService productService;
 
     @Autowired
-    public OrderController(OrderService orderService, SupplierService supplierService) {
+    public OrderController(OrderService orderService, SupplierService supplierService, CarService carService, ProductService productService) {
         this.orderService = orderService;
         this.supplierService = supplierService;
+        this.carService = carService;
+        this.productService = productService;
     }
 
     @GetMapping
@@ -41,7 +49,7 @@ public class OrderController {
 
     @PostMapping("/create")
     public String createOrder(@ModelAttribute("order") Order order,
-                                @RequestParam("supplierId") Long supplierId) {
+                              @RequestParam("supplierId") Long supplierId) {
         Supplier supplier = supplierService.getById(supplierId);
         order.setSupplier(supplier);
         orderService.addNew(order);
@@ -65,6 +73,25 @@ public class OrderController {
     public String updateOrder(@ModelAttribute("order") Order order) {
         orderService.update(order);
         return "redirect:/orders";
+    }
+
+    @PostMapping("/addProductAndCar")
+    public String addProductAndCar(@ModelAttribute("order") Order order,
+                                   @RequestParam("carId") Long carId,
+                                   @RequestParam("productId") Long productId) {
+        orderService.addProductAndCar(order, carId, productId);
+        return "redirect:/orders";
+    }
+
+    @GetMapping("/addProductAndCar")
+    public String showAddProductAndCar(@PathVariable("id") Long id, Model model) {
+        Order order = orderService.getById(id);
+        List<Car> cars = carService.getAll();
+        List<Product> products = productService.getAll();
+        model.addAttribute("order", order);
+        model.addAttribute("cars", cars);
+        model.addAttribute("products", products);
+        return "addProductAndCar";
     }
 
 }

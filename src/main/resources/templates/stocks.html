@@ -20,21 +20,41 @@
         <td th:text="${stock.quantity}"></td>
         <td th:if="${stock.product != null}" th:text="${stock.product.name}"></td>
         <td th:unless="${stock.product != null}">No Product</td>
-        <!-- other columns -->
+
         <td> <a th:href="@{/stocks/delete/{id}(id=${stock.id})}">Delete</a></td>
         <td> <a th:href="@{/stocks/edit/{id}(id=${stock.id})}">Edit</a></td>
 
     </tr>
-    <form action="/stocks" method="get">
-        <label for="cellNumber">Введите номер ячейки:</label>
-        <input type="text" id="cellNumber" name="cellNumber">
-        <button type="submit">Показать ячейки</button>
-    </form>
+
 </table>
 <a href="/stocks/new">Create Stock</a>
 <div>
     <a href="/"> Back</a>
 </div>
+
+
+<form action="/stocks/updateStock" method="post">
+    <input type="hidden" name="id" value="1"> <!-- Поле для передачи ID стока -->
+    <div>
+        <label for="cellNumber">Cell Number:</label>
+        <input type="text" id="cellNumber" name="cellNumber" value="">
+    </div>
+    <div>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" value="">
+    </div>
+    <div>
+        <label for="productId">Product:</label>
+        <select id="productId" name="productId">
+            <option th:each="product : ${products}"
+                    th:value="${product.id}"
+                    th:text="${product.name}">
+            </option>
+        </select>
+    </div>
+    <input type="submit" value="Submit">
+</form>
+
 
 </body>
 </html>

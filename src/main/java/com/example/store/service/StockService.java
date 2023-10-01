@@ -2,12 +2,13 @@ package com.example.store.service;
 
 import com.example.store.entity.Stock;
 import com.example.store.repository.StockRepository;
+import com.example.store.repository.StockSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class StockService {
@@ -39,4 +40,13 @@ public class StockService {
         stockRepository.save(stock);
     }
 
+    public List<Stock> findStocksByFilters(Integer cellNumber, Long productId, Integer quantity) {
+        Specification<Stock> spec1 = StockSpecifications.filterByCellNumber(cellNumber);
+        Specification<Stock> spec2 = StockSpecifications.filterByProductId(productId);
+        Specification<Stock> spec3 = StockSpecifications.filterByQuantity(quantity);
+
+        Specification<Stock> finalSpec = Specification.where(spec1).and(spec2).and(spec3);
+
+        return stockRepository.findAll(finalSpec);
+    }
 }

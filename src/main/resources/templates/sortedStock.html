@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sorted Stock</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Cell number</th>
+        <th>Quantity</th>
+        <th>Product</th>
+    </tr>
+    <tr th:each="stock : ${sortedStock}">
+        <td th:text="${stock.id}"></td>
+        <td th:text="${stock.cellNumber}"></td>
+        <td th:text="${stock.quantity}"></td>
+        <td th:if="${stock.product != null}" th:text="${stock.product.name}"></td>
+        <td th:unless="${stock.product != null}">No Product</td>
+
+
+    </tr>
+
+</table>
+<div>
+    <a href="/stocks"> Back</a>
+</div>
+</body>
+</html>

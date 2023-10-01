@@ -16,7 +16,7 @@
         <td th:text="${supplier.name}"></td>
         <td th:checkbox="${supplier.documentsPackage}"></td>
         <td th:checkbox="${supplier.guarantee}"></td>
-        <!-- other columns -->
+
         <td> <a th:href="@{/suppliers/delete/{id}(id=${supplier.id})}">Delete</a></td>
         <td> <a th:href="@{/suppliers/edit/{id}(id=${supplier.id})}">Edit</a></td>
     </tr>

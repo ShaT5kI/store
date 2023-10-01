@@ -35,11 +35,25 @@ public class StockController {
         return "stocks";
     }
 
+    @PostMapping("/updateStock")
+    public String updateParamStock(@RequestParam(value = "cellNumber", required = false) Integer cellNumber,
+                                   @RequestParam(value = "quantity", required = false) Integer quantity,
+                                   @RequestParam(value = "productId", required = false) Long productId,
+                                   Model model) {
+
+        List<Stock> stocks = stockService.findStocksByFilters(cellNumber, productId, quantity);
+        model.addAttribute("sortedStock", stocks);
+
+        return "sortedStock";
+    }
+
+
     @GetMapping("/new")
     public String showCreateStockForm(Model model) {
         model.addAttribute("stock", new Stock());
         List<Product> products = productService.getAll();
         model.addAttribute("products", products);
+
         return "createStock";
     }
 
@@ -58,12 +72,6 @@ public class StockController {
 
     }
 
-    @GetMapping("/")
-    public String showStocksByCellNumber(@RequestParam(name = "cellNumber") int cellNumber, Model model) {
-        List<Stock> stocks = stockRepository.findByCellNumberOrderByCellNumberAsc(cellNumber);
-        model.addAttribute("stocks", stocks);
-        return "stocks";
-    }
 
 
     @GetMapping("/delete/{id}")

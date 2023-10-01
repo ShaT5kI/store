@@ -4,19 +4,24 @@ import com.example.store.entity.Car;
 import com.example.store.entity.CarOrderProduct;
 import com.example.store.entity.Order;
 import com.example.store.entity.Product;
+import com.example.store.repository.CarOrderProductRepository;
+import com.example.store.repository.CarRepository;
 import com.example.store.repository.OrderRepository;
+import com.example.store.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+
+    private CarRepository carRepository;
+    private ProductRepository productRepository;
+
+    private CarOrderProductRepository carOrderProductRepository;
 
     @Autowired
     public OrderService(OrderRepository orderRepository) {
@@ -80,5 +85,19 @@ public class OrderService {
         }
 
         return products;
+    }
+
+    public void addProductAndCar(Order order, Long carId, Long productId) {
+        CarOrderProduct carOrderProduct = new CarOrderProduct();
+
+        Optional<Car> car = carRepository.findById(carId);
+        Optional<Product> product = productRepository.findById(productId);
+
+        if (car.isPresent() && product.isPresent()) {
+            carOrderProduct.setCar(car.get());
+            carOrderProduct.setProduct(product.get());
+            carOrderProduct.setOrder(order);
+            carOrderProductRepository.save(carOrderProduct);
+        }
     }
 }

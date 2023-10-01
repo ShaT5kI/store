@@ -4,6 +4,7 @@ import com.example.store.ProcedureCaller;
 import com.example.store.entity.*;
 import com.example.store.repository.ProductRepository;
 import com.example.store.repository.SupplierRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,6 +62,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    @Transactional
     public List<Car> getCarsForProduct(Long carId) {
         var productOptional = productRepository.findById(carId);
 
@@ -79,6 +81,7 @@ public class ProductService {
         return cars;
     }
 
+    @Transactional
     public List<Order> getOrdersForProduct(Long carId) {
         var productOptional = productRepository.findById(carId);
 

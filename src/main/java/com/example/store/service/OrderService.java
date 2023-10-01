@@ -5,6 +5,7 @@ import com.example.store.entity.CarOrderProduct;
 import com.example.store.entity.Order;
 import com.example.store.entity.Product;
 import com.example.store.repository.OrderRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,7 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    @Transactional
     public List<Car> getCarsForOrder(Long carId) {
         var orderOptional = orderRepository.findById(carId);
 
@@ -61,6 +63,7 @@ public class OrderService {
         return cars;
     }
 
+    @Transactional
     public List<Product> getProductsForOrder(Long carId) {
         var orderOptional = orderRepository.findById(carId);
 

@@ -14,6 +14,10 @@
     <tr th:each="owner : ${owners}">
         <td th:text="${owner.id}"></td>
         <td th:text="${owner.name}"></td>
+
+        <td th:if="${owner.supplier != null}" th:text="${owner.supplier.name}"></td>
+        <td th:unless="${owner.supplier != null}">No Supplier</td>
+        <td> <a th:href="@{/owners/delete/{id}(id=${owner.id})}">Delete</a></td>
     </tr>
 </table>
 

@@ -11,6 +11,10 @@
         <label>Name: </label>
         <input type="text" th:field="*{name}" required>
 
+        <label>Supplier: </label>
+        <select name="supplierId" required>
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
+        </select>
     </div>
 
     <button type="submit">Create</button>

@@ -77,10 +77,9 @@ public class OrderController {
     }
 
     @PostMapping("/addProductAndCar")
-    public String addProductAndCar(@ModelAttribute("order") Order order,
+    public String addProductAndCar(@RequestParam("id") Long orderId,
                                    @RequestParam("carId") Long carId,
                                    @RequestParam("productId") Long productId) {
-        Long orderId = order.getId();
         orderService.addProductAndCar(orderId, carId, productId);
         return "redirect:/orders";
     }

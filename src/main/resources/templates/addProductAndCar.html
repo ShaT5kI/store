@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<form action="/orders/addProductAndCar" method="post" th:object="${order}" >
+<form action="/orders/addProductAndCar" method="post">
+    <input type="hidden" name="id" th:value="${order.id}" />
+
     <div>
         <label>Car: </label>
         <select name="productId" required>

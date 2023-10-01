@@ -100,7 +100,11 @@ public class OrderService {
             carOrderProduct.setCar(car.get());
             carOrderProduct.setProduct(product.get());
             carOrderProduct.setOrder(order.get());
-            carOrderProductRepository.save(carOrderProduct);
+
+            if (carOrderProductRepository.findByCarIdAndOrderIdAndProductId(
+                    carId, orderId, productId).isEmpty()) {
+                carOrderProductRepository.save(carOrderProduct);
+            }
         }
     }
 }
